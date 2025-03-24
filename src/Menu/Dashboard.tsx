@@ -3,6 +3,7 @@ import Layout from "../Layout/Layout"
 import { Add, ArrowForward, ArrowOutward } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { Cell, Pie, PieChart, Tooltip } from "recharts";
+import { useNavigate } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -40,6 +41,8 @@ const DashboardContent =()=>{
       ))}
     </div>
   );
+
+  const navigate = useNavigate();
 
 
   return (
@@ -217,7 +220,7 @@ const DashboardContent =()=>{
   </div>
 
   {/* Add new student */}
-  <div style={{backgroundColor:'#AB47BC',cursor:'pointer',marginTop:'3%', borderRadius:'12px', padding:'2%', display:"flex", justifyContent:'space-between', alignItems:"center"}}>
+  <div onClick={()=>navigate('/addchild')} style={{backgroundColor:'#AB47BC',cursor:'pointer',marginTop:'3%', borderRadius:'12px', padding:'2%', display:"flex", justifyContent:'space-between', alignItems:"center"}}>
     <div style={{display:'flex', justifyContent:'start', alignItems:'center', gap:'15px'}}>
       <div style={{height:"60px", width:'60px', borderRadius: '50%', boxShadow:"0px 0px 4px 0px rgba(0, 0,0,0.25)", display:'flex', justifyContent:'center', alignItems:'center'}}>
         <img src="/images/studenticon.svg"></img>
