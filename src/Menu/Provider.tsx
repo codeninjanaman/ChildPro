@@ -1,3 +1,4 @@
+import ProfiderForm from "../Admin/ProviderForm/ProfiderForm";
 import Layout from "../Layout/Layout"
 
 
@@ -11,7 +12,7 @@ const Provider = () => {
 
 const ProviderContent =()=>{
   return (
-<div style={{color:"black"}}>Provider</div>
+<div><ProfiderForm/></div>
   );
 }
 
