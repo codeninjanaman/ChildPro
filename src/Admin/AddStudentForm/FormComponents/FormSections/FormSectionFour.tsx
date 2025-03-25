@@ -11,7 +11,7 @@ const FormSectionFour = ({
 }) => (
   <div>
     <h2 style={{ fontFamily: 'Montserrat', color: '#00E676', fontSize: '18px', fontWeight: '500' }}>
-      {parentPrefix === 'Parent1' ? 'Parent 1' : 'Parent 2'}
+      
     </h2>
 
     <div style={{ display: 'flex', width: '100%', gap: '3%' }}>

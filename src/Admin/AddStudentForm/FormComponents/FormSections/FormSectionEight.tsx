@@ -1,17 +1,15 @@
 import { useState } from 'react';
 
-const FormSectionEight = ({ formik, stepSubmitted, setShowParent2Sections }:{ formik: any, stepSubmitted: boolean , setShowParent2Sections:any}) => {
+const FormSectionEight = ({ formik,  }:{ formik: any }) => {
   const [hasParent2, setHasParent2] = useState(false);
 
   const handleYes = () => {
     setHasParent2(true);
-    setShowParent2Sections(true);
     formik.setFieldValue('hasParent2', true);
   };
 
   const handleNo = () => {
     setHasParent2(false);
-    setShowParent2Sections(false);
     formik.setFieldValue('hasParent2', false);
   };
 

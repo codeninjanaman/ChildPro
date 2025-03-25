@@ -12,6 +12,12 @@ import FormSectionSix from './FormComponents/FormSections/FormSectionSix';
 import FormSectionSeven from './FormComponents/FormSections/FormSectionSeven';
 import Sidebar from './FormComponents/SideBar/Sidebar';
 import FormSectionEight from './FormComponents/FormSections/FormSectionEight';
+import FormSectionNine from './FormComponents/FormSections/FormSectionNine';
+import FormSectionTen from './FormComponents/FormSections/FormSectionTen';
+import FormSectionEleven from './FormComponents/FormSections/FormSectionEleven';
+import FormSectionTwelve from './FormComponents/FormSections/FormSectionTwelve';
+import FormSectionThirteen from './FormComponents/FormSections/FormSectionThirteen';
+import FormSectionFourteen from './FormComponents/FormSections/FormSectionFourteen';
 
 const STORAGE_KEY = 'child_form_data';
 
@@ -70,7 +76,79 @@ Parent1accountNumber: '',
 Parent1bsb: '',
 Parent1bankBranch:'', 
 Parent1methodofcontact:'',
-Parent1Indigenousstate :''
+Parent1Indigenousstate :'',
+hasParent2: false,
+Parent2firstName: '',
+  Parent2middleName: '',
+  Parent2lastName: '',
+  Parent2preferredName: '',
+  Parent2gender: '',
+  Parent2crn: '',
+  Parent2dateOfBirth: '',
+  Parent2birthCertificate: null,
+  Parent2countryOfBirth: '',
+  Parent2homeAddress: '',
+  Parent2suburb: '',
+  Parent2state: '',
+  Parent2postcode: '',
+  Parent2homephone: '',
+  Parent2workphone: '',
+  Parent2mobile: '',
+  Parent2email: '',
+  Parent2occupation: '',
+  Parent2placeofwork: '',
+  Parent2workstart: '',
+  Parent2workfinish: '',
+  Parent2language: [],
+  Parent2CulturalBackground: '',
+  Parent2hasBankDetails: false,
+  Parent2bankName: '',
+  Parent2accountName: '',
+  Parent2accountNumber: '',
+  Parent2bsb: '',
+  Parent2bankBranch: '',
+  Parent2methodofcontact: '',
+  Parent2Indigenousstate: '',
+  hasThirdPartyBilling: false,
+thirdPartyName: '',
+thirdPartyAddress: '',
+thirdPartySuburb: '',
+thirdPartyState: '',
+thirdPartyPostcode: '',
+thirdPartyEmail: '',
+thirdPartyPhone: '',
+thirdPartyContactPerson: '',
+isDivorced: false,
+legalCustody: '',
+parent1AccessType: '',
+parent1AccessDetails: '',
+parent2AccessType: '',
+parent2AccessDetails: '',
+hasCourtOrders: false,
+courtOrderDetails: '',
+courtOrderFile: null,
+hasOtherCourtOrders: false,
+otherCourtOrderDetails: '',
+otherCourtOrderFile: null,
+emergencyContactName: '',
+emergencyContactRelationship: '',
+emergencyContactDOB: '',
+emergencyContactAddress: '',
+emergencyContactHomePhone: '',
+emergencyContactWorkPhone: '',
+emergencyContactOccupation: '',
+emergencyContactMobile: '',
+authCollectDelivery: false,
+authExcursion: false,
+authMedical: false,
+authAmbulance: false,
+authTransport: false,
+authMedication: false,
+authNotifyEmergencies: false,
+
+
+
+
 };
 
 const validationSchema = Yup.object({
@@ -95,6 +173,7 @@ const validationSchema = Yup.object({
   preferredStartDate: Yup.date().required('Required'),
   preferredEducator: Yup.string(),
   Parent1firstName: Yup.string().required('Required'),
+  
   Parent1middleName: Yup.string(),
   Parent1lastName: Yup.string().required('Required'),
   Parent1preferredName: Yup.string(),
@@ -111,6 +190,7 @@ const validationSchema = Yup.object({
   Parent1email: Yup.string().required('Required'),
   Parent1occupation: Yup.string().required('Required'),
   Parent1language: Yup.array().min(1, 'Select atleast one language'),
+  Parent2language: Yup.array().min(1, 'Select at least one language'),
   Parent1CulturalBackground: Yup.string().required('Required'),
   Parent1bankName: Yup.string().when('Parent1hasBankDetails', {
     is: (val: boolean) => val === true,
@@ -139,8 +219,109 @@ const validationSchema = Yup.object({
   }),
   Parent1methodofcontact: Yup.string().required('Required'),
   Parent1Indigenousstate: Yup.string().required('Required'),
+  hasThirdPartyBilling: Yup.boolean(),
+
+thirdPartyName: Yup.string().when('hasThirdPartyBilling', {
+  is: true,
+  then: () => Yup.string().required('Name on invoice is required'),
+  otherwise: () => Yup.string(),
+}),
+
+thirdPartyAddress: Yup.string().when('hasThirdPartyBilling', {
+  is: true,
+  then: () => Yup.string().required('Address is required'),
+  otherwise: () => Yup.string(),
+}),
+
+thirdPartySuburb: Yup.string().when('hasThirdPartyBilling', {
+  is: true,
+  then: () => Yup.string().required('Suburb is required'),
+  otherwise: () => Yup.string(),
+}),
+
+thirdPartyState: Yup.string().when('hasThirdPartyBilling', {
+  is: true,
+  then: () => Yup.string().required('State is required'),
+  otherwise: () => Yup.string(),
+}),
+
+thirdPartyPostcode: Yup.string().when('hasThirdPartyBilling', {
+  is: true,
+  then: () => Yup.string().required('Postcode is required'),
+  otherwise: () => Yup.string(),
+}),
+
+thirdPartyEmail: Yup.string().when('hasThirdPartyBilling', {
+  is: true,
+  then: () => Yup.string()
+    .email('Invalid email')
+    .required('Email is required'),
+  otherwise: () => Yup.string(),
+}),
+
+thirdPartyPhone: Yup.string().when('hasThirdPartyBilling', {
+  is: true,
+  then: () => Yup.string().required('Phone is required'),
+  otherwise: () => Yup.string(),
+}),
+
+thirdPartyContactPerson: Yup.string().when('hasThirdPartyBilling', {
+  is: true,
+  then: () => Yup.string().required('Contact person is required'),
+  otherwise: () => Yup.string(),
+}),
+
+isDivorced: Yup.boolean().required(),
+legalCustody: Yup.string().when('isDivorced', {
+  is: true,
+  then:()=> Yup.string().required('Select legal custody'),
+  otherwise: () => Yup.string(),
   
-  
+}),
+parent1AccessType: Yup.string().required('Required'),
+parent1AccessDetails: Yup.string().required('Required'),
+parent2AccessType: Yup.string().required('Required'),
+parent2AccessDetails: Yup.string().required('Required'),
+hasCourtOrders: Yup.boolean(),
+courtOrderDetails: Yup.string().when('hasCourtOrders', {
+  is: true,
+  then:()=> Yup.string().required('Details required'),
+  otherwise: () => Yup.string(),
+}),
+courtOrderFile: Yup.mixed().when('hasCourtOrders', {
+  is: true,
+  then:()=> Yup.mixed().required('Document required'),
+  otherwise: () => Yup.string(),
+}),
+hasOtherCourtOrders: Yup.boolean(),
+otherCourtOrderDetails: Yup.string().when('hasOtherCourtOrders', {
+  is: true,
+  then:()=> Yup.string().required('Details required'),
+  otherwise: () => Yup.string(),
+}),
+otherCourtOrderFile: Yup.mixed().when('hasOtherCourtOrders', {
+  is: true,
+  then:()=> Yup.mixed().required('Document required'),
+  otherwise: () => Yup.string(),
+}),
+emergencyContactName: Yup.string().required('Name is required'),
+emergencyContactRelationship: Yup.string().required('Relationship is required'),
+emergencyContactDOB: Yup.date().required('Date of Birth is required'),
+emergencyContactAddress: Yup.string().required('Address is required'),
+emergencyContactHomePhone: Yup.string().required('Home phone is required'),
+emergencyContactWorkPhone: Yup.string(),
+emergencyContactOccupation: Yup.string().required('Occupation is required'),
+emergencyContactMobile: Yup.string().required('Mobile number is required'),
+authCollectDelivery: Yup.boolean().oneOf([true, false], 'Required'),
+authExcursion: Yup.boolean().oneOf([true, false], 'Required'),
+authMedical: Yup.boolean().oneOf([true, false], 'Required'),
+authAmbulance: Yup.boolean().oneOf([true, false], 'Required'),
+authTransport: Yup.boolean().oneOf([true, false], 'Required'),
+authMedication: Yup.boolean().oneOf([true, false], 'Required'),
+authNotifyEmergencies: Yup.boolean().oneOf([true, false], 'Required'),
+
+
+    
   
 });
 
@@ -207,14 +388,14 @@ export const MultiSelectTagField = ({
     formik: any;
     stepSubmitted: boolean;
   }) => {
-    const selected = formik.values[name] as string[];
+    const selected = (formik.values[name] ?? []) as string[];
   
     const toggleOption = (option: string) => {
-      const updated = selected.includes(option)
-        ? selected.filter((lang) => lang !== option)
-        : [...selected, option];
-      formik.setFieldValue(name, updated);
-    };
+        const updated = selected.includes(option)
+          ? selected.filter((lang) => lang !== option)
+          : [...selected, option];
+        formik.setFieldValue(name, updated);
+      };
   
     return (
       <div style={{ marginBottom: '1rem', width:'100%' }}>
@@ -347,27 +528,66 @@ export const MultiSelectTagField = ({
 
 
   );
-  
-  
-const sections = [
-  'Child Introduction & Address',
-  'School, Language & Class Schedule',
-  'Parent 1 & Address',
-  'Contact & Occupation',
-  'Health Care Card',
-  'Bank Account Details',
-  'Contact Method & Disability',
-  'Parent 2',
-  'Third Party Billing',
-  'Custody Arrangement',
-  'Emergency Contact & Information',
-  'Authority To',
-  'Add Person',
-  'Health & Medical Information',
-  'Add Another Children'
-];
 
-const stepFields: { [key: number]: (keyof typeof initialValues)[] } = {
+  
+  
+  
+  
+
+
+const ChildForm = () => {
+  const [step, setStep] = useState(0);
+  const [stepSubmitted, setStepSubmitted] = useState(false);
+
+  const formik = useFormik({
+    initialValues: JSON.parse(localStorage.getItem(STORAGE_KEY) || JSON.stringify(initialValues)),
+    validationSchema,
+    onSubmit: (values) => {
+      console.log('Submitted Data', values);
+      localStorage.removeItem(STORAGE_KEY);
+      alert('Form submitted!');
+    },
+    validateOnBlur: false,
+    validateOnChange: false
+  });
+
+
+  const [showParent2Sections, setShowParent2Sections] = useState(
+  JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')?.hasParent2 || false
+);
+
+// Keep in sync with formik
+useEffect(() => {
+  setShowParent2Sections(formik.values.hasParent2 === true);
+}, [formik.values.hasParent2]);
+
+
+  const allSections = [
+    'Child Introduction & Address',
+    'School, Language & Class Schedule',
+    'Parent 1 & Address',
+    'Contact & Occupation',
+    'Health Care Card',
+    'Bank Account Details',
+    'Contact Method & Disability',
+    'Parent 2',
+    'Parent 2 Address',
+    'Parent 2 Contact & Occupation',
+    'Parent 2 Health Care Card',
+    'Parent 2 Bank Details',
+    'Parent 2 Contact Method & Disability',
+    'Third Party Billing',
+    'Custody Arrangement',
+    'Emergency Contact & Information',
+    'Authority To',
+    'Health & Medical Information',
+    'Other'
+  ];
+  
+  const sections = showParent2Sections ? allSections : allSections.filter((_, i) => i < 8 || i > 12);
+  
+
+const baseStepFields: { [key: number]: (keyof typeof initialValues)[] } = {
   0: [
     'firstName', 'middleName', 'lastName', 'preferredName', 'gender', 'crn',
     'dateOfBirth', 'birthCertificate',
@@ -391,26 +611,38 @@ const stepFields: { [key: number]: (keyof typeof initialValues)[] } = {
   'healthCardExpiries'],
   5: ['Parent1bankName', 'Parent1accountName', 'Parent1accountNumber', 'Parent1bsb'],
   6: ['Parent1methodofcontact', 'Parent1Indigenousstate'],
+  7: ['hasParent2'],
+  14: ['legalCustody',
+    'parent1AccessType',
+    'parent1AccessDetails',
+    'parent2AccessType',
+    'parent2AccessDetails',
+    'hasCourtOrders',
+    'courtOrderDetails',
+    'courtOrderFile',
+    'hasOtherCourtOrders',
+    'otherCourtOrderDetails',
+    'otherCourtOrderFile'],
+  
 };
 
-const ChildForm = () => {
-  const [step, setStep] = useState(0);
-  const [stepSubmitted, setStepSubmitted] = useState(false);
-  const [showParent2Sections, setShowParent2Sections] = useState(false);
+
+
+const parent2Fields = {
+    8: ['Parent2firstName', 'Parent2middleName', 'Parent2lastName', 'Parent2preferredName', 'Parent2gender', 'Parent2crn', 'Parent2dateOfBirth', 'Parent2birthCertificate', 'Parent2countryOfBirth', 'Parent2homeAddress', 'Parent2suburb', 'Parent2state', 'Parent2postcode'],
+    9: ['Parent2homephone', 'Parent2workphone', 'Parent2mobile', 'Parent2email', 'Parent2occupation', 'Parent2placeofwork', 'Parent2workstart', 'Parent2workfinish', 'Parent2language', 'Parent2CulturalBackground'],
+    10: ['healthCardType', 'healthCardDocuments', 'healthCardExpiries'], // optional: duplicate if different per parent
+    11: ['Parent2bankName', 'Parent2accountName', 'Parent2accountNumber', 'Parent2bsb', 'Parent2bankBranch'],
+    12: ['Parent2methodofcontact', 'Parent2Indigenousstate'],
+  };
+
+  const stepFields = showParent2Sections ? { ...baseStepFields, ...parent2Fields } : baseStepFields;
 
   
 
-  const formik = useFormik({
-    initialValues: JSON.parse(localStorage.getItem(STORAGE_KEY) || JSON.stringify(initialValues)),
-    validationSchema,
-    onSubmit: (values) => {
-      console.log('Submitted Data', values);
-      localStorage.removeItem(STORAGE_KEY);
-      alert('Form submitted!');
-    },
-    validateOnBlur: false,
-    validateOnChange: false
-  });
+  
+
+ 
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formik.values));
@@ -418,17 +650,21 @@ const ChildForm = () => {
 
   const next = async () => {
     setStepSubmitted(true);
-    const fieldsToValidate = stepFields[step];
-    const errors = await formik.validateForm();
-    const stepErrors = Object.keys(errors).filter(key => fieldsToValidate.includes(key as keyof typeof initialValues));
+    const fieldsToValidate = (stepFields as Record<number, (keyof typeof initialValues)[]>)[step] || [];
+    
     console.log(formik.values)
+    const errors = await formik.validateForm();
+    const stepErrors = Object.keys(errors).filter(key =>
+        fieldsToValidate.includes(key as keyof typeof initialValues)
+      );
+      
 
     if (stepErrors.length === 0) {
-      setStep((s) => Math.min(s + 1, sections.length - 1));
+      setStep((s) => Math.min(s + 1, visibleStepComponents.length - 1));
       setStepSubmitted(false);
     } else {
       formik.setTouched(
-        fieldsToValidate.reduce((acc, key) => ({ ...acc, [key]: true }), {}),
+        fieldsToValidate.reduce((acc:any, key:any) => ({ ...acc, [key]: true }), {}),
         true
       );
     }
@@ -444,6 +680,39 @@ const ChildForm = () => {
     setStepSubmitted(false);
   };
 
+  const visibleStepComponents = [
+    <FormSectionOne formik={formik} stepSubmitted={stepSubmitted} />,
+    <FormSectionTwo formik={formik} stepSubmitted={stepSubmitted} />,
+    <FormSectionThree formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />,
+    <FormSectionFour formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />,
+    <FormSectionFive formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />,
+    <FormSectionSix formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />,
+    <FormSectionSeven formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />,
+    <FormSectionEight formik={formik} />,
+  ];
+  
+  if (showParent2Sections) {
+    visibleStepComponents.push(
+      <FormSectionThree formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />,
+      <FormSectionFour formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />,
+      <FormSectionFive formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />,
+      <FormSectionSix formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />,
+      <FormSectionSeven formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />
+    );
+  }
+  
+  visibleStepComponents.push(
+    <FormSectionNine formik={formik} stepSubmitted={stepSubmitted} />,
+    <FormSectionTen formik={formik} stepSubmitted={stepSubmitted} />,
+    <FormSectionEleven formik={formik} stepSubmitted={stepSubmitted} />,
+    <FormSectionTwelve formik={formik} stepSubmitted={stepSubmitted} />,
+    <FormSectionThirteen formik={formik} stepSubmitted={stepSubmitted} />,
+    <FormSectionFourteen formik={formik} stepSubmitted={stepSubmitted} />,
+    
+
+  );
+  
+
   return (
     
     <Row style={{ height: '100vh', backgroundColor: '#FFFEFA', overflow: 'hidden' }}>
@@ -457,17 +726,25 @@ const ChildForm = () => {
 
       <Col span={19} style={{ overflow: 'auto', maxHeight: '100vh'}} >
       <form onSubmit={formik.handleSubmit} style={{ padding: '2rem', flex: 1 }}>
-        {step === 0 && <FormSectionOne formik={formik} stepSubmitted={stepSubmitted} />}
+        {/* {step === 0 && <FormSectionOne formik={formik} stepSubmitted={stepSubmitted} />}
         {step === 1 && <FormSectionTwo formik={formik} stepSubmitted={stepSubmitted} />}
         {step === 2 && <FormSectionThree formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />}
         {step === 3 && <FormSectionFour formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />}
         {step === 4 && <FormSectionFive formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />}
         {step === 5 && <FormSectionSix formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />}
         {step === 6 && <FormSectionSeven formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1'/>}
-        {step === 7 && <FormSectionEight formik={formik} stepSubmitted={stepSubmitted} setShowParent2Sections={setShowParent2Sections}/>}
+        {step === 7 && <FormSectionEight formik={formik} />}
+        {showParent2Sections && step === 8 && <FormSectionThree formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />}
+{showParent2Sections && step === 9 && <FormSectionFour formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />}
+{showParent2Sections && step === 10 && <FormSectionFive formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />}
+{showParent2Sections && step === 11 && <FormSectionSix formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />}
+{showParent2Sections && step === 12 && <FormSectionSeven formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />}
+{step === 13 && <FormSectionNine formik={formik} stepSubmitted={stepSubmitted} />}
+{step === 14 && <FormSectionTen formik={formik} stepSubmitted={stepSubmitted} />} */}
+           {visibleStepComponents[step]}
         <div style={{ marginTop: '2rem' , display:'flex', justifyContent:'space-between',marginBlock:"5%"}}>
           <button type="button" onClick={back} style={{ border:'1px solid rgba(0,0,0,0.8)', borderRadius:'12px', backgroundColor:"transparent", padding:'0.7% 2.5%'}}>Back</button>
-          <button type="button" onClick={next} style={{ border:"none", color:'white', borderRadius:'12px', backgroundColor:"#00E676", padding:'0.7% 2.5%'}}>{step === sections.length - 1 ? 'Submit' : 'Next'}</button>
+          <button type="button" onClick={next} style={{ border:"none", color:'white', borderRadius:'12px', backgroundColor:"#00E676", padding:'0.7% 2.5%'}}>{step === visibleStepComponents.length - 1 ? 'Submit' : 'Next'}</button>
         </div>
       </form>
       </Col>
