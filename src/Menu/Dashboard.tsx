@@ -234,7 +234,7 @@ const DashboardContent =()=>{
   </div>
 
    {/* Add new educator */}
-   <div style={{backgroundColor:'#2196F3',cursor:'pointer',marginTop:'3%', borderRadius:'12px', padding:'2%', display:"flex", justifyContent:'space-between', alignItems:"center"}}>
+   <div onClick={()=>navigate('/addeducator')} style={{backgroundColor:'#2196F3',cursor:'pointer',marginTop:'3%', borderRadius:'12px', padding:'2%', display:"flex", justifyContent:'space-between', alignItems:"center"}}>
     <div style={{display:'flex', justifyContent:'start', alignItems:'center', gap:'15px'}}>
       <div style={{height:"60px", width:'60px', borderRadius: '50%', boxShadow:"0px 0px 4px 0px rgba(0, 0,0,0.25)", display:'flex', justifyContent:'center', alignItems:'center'}}>
         <img src="/images/educatoricon.svg"></img>

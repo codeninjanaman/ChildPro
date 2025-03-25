@@ -9,6 +9,7 @@ import ManageChild from './Menu/ManageChild'
 import PaymentManagement from './Menu/Payments'
 import ContactUs from './Menu/ContactUs'
 import ChildForm from './Admin/AddStudentForm/StudentForm'
+import EducatorForm from './Admin/AddEducatorForm/EducatorForm'
 
 function App() {
   
@@ -23,7 +24,7 @@ function App() {
       <Route path="/payment-management" element={<PaymentManagement/>} />
       <Route path="/contactus" element={<ContactUs/>} />
       <Route path="/addchild" element={<ChildForm/>} />
-      
+      <Route path="/addeducator" element={<EducatorForm/>} />
       </Routes>
     </>
   )
