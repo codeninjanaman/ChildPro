@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useFormik, FormikErrors } from "formik";
 import * as Yup from "yup";
+import Layout from "../Layout/Layout";
 
 const STORAGE_KEY = "provider_form_data";
 
@@ -140,7 +141,9 @@ const renderFormikError = (
   return renderNestedError(error);
 };
 
-const ProviderForm: React.FC = () => {
+
+
+const ProviderFormcontent: React.FC = () => {
   const getInitialValues = (): ProviderFormValues => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -579,5 +582,13 @@ const ProviderForm: React.FC = () => {
     </div>
   );
 };
+
+const ProviderForm = () => {
+  return (
+    <div >
+     <Layout content={<ProviderFormcontent/> } activeIndex={1}/>
+    </div>
+  )
+}
 
 export default ProviderForm;

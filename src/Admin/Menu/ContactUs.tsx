@@ -4,7 +4,7 @@ import Layout from "../Layout/Layout"
 const ContactUs = () => {
   return (
     <div >
-     <Layout content={<ContactUsContent/>}/>
+     <Layout content={<ContactUsContent/>} activeIndex={5}/>
     </div>
   )
 }

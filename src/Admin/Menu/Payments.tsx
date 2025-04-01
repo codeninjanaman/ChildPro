@@ -4,7 +4,7 @@ import Layout from "../Layout/Layout"
 const PaymentManagement = () => {
   return (
     <div >
-     <Layout content={<PaymentManagementContent/>}/>
+     <Layout content={<PaymentManagementContent/>} activeIndex={4}/>
     </div>
   )
 }

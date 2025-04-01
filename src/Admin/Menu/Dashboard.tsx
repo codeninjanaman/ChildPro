@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
   return (
     <div >
-     <Layout content={<DashboardContent/>}/>
+     <Layout content={<DashboardContent/>} activeIndex={0}/>
     </div>
   )
 }

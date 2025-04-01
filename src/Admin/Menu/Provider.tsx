@@ -4,7 +4,7 @@ import Layout from "../Layout/Layout"
 const Provider = () => {
   return (
     <div >
-     <Layout content={<ProviderContent/>}/>
+     <Layout content={<ProviderContent/> } activeIndex={1}/>
     </div>
   )
 }

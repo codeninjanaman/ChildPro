@@ -1,0 +1,21 @@
+/* Green table header */
+.custom-ant-table .ant-table-thead > tr > th {
+    background-color: hsl(150, 100%, 40%) !important;
+    color: white !important;
+    padding: 16px !important;
+    margin: 0 !important;
+    border: none;
+    font-weight: 600;
+    border-radius: 0px !important;
+  }
+  
+  /* Remove table padding in body cells if needed */
+  .custom-ant-table .ant-table-tbody > tr > td {
+    padding: 16px !important;
+  }
+  
+  /* Smaller table font */
+  .custom-ant-table .ant-table {
+    font-size: 14px;
+  }
+  
