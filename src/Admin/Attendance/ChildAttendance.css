@@ -1,0 +1,28 @@
+.custom-ant-table {
+    box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.25) !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+
+.custom-ant-table .ant-table-thead > tr > th {
+    background-color: white !important;
+    color: #1E1E1E !important;
+    padding: 16px !important;
+    margin: 0 !important;
+    
+    font-weight: 600;
+    border-radius: 0px !important;
+    border-bottom: 1px solid #ddd;
+    
+  }
+  
+  /* Remove table padding in body cells if needed */
+  .custom-ant-table .ant-table-tbody > tr > td {
+    padding: 16px !important;
+  }
+  
+  /* Smaller table font */
+  .custom-ant-table .ant-table {
+    font-size: 14px;
+  }

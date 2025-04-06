@@ -19,6 +19,9 @@ import AwaitedChildDetails from './Admin/ManageChild/awaitedchilddetails'
 import Dashboard from './Admin/Menu/Dashboard'
 import RegisteredChildDetails from './Admin/ManageChild/registeredChildren'
 import RegisteredChildrenTable from './Admin/ManageChild/registeredChildrenTable'
+import AttendanceDashboardPage from './Admin/Attendance/Attendancelandingpage'
+import PresentChild from './Admin/Attendance/Presenttable'
+import AttendanceDetails from './Admin/Attendance/ChildAttendance'
 
 function App() {
   
@@ -39,6 +42,9 @@ function App() {
       
      <Route path="/registered-child/:crn" element={<RegisteredChildDetails />} />
      <Route path="/registered-children-table" element={<RegisteredChildrenTable />} />
+     <Route path="/attendance" element={<AttendanceDashboardPage/>} />
+     <Route path="/present-children" element={<PresentChild/>} />
+     <Route path="/attendancedetails/:crn" element={<AttendanceDetails/>} />
 
       </Routes>
     </>

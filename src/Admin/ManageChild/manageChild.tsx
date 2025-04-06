@@ -99,7 +99,7 @@ const ChildDashboardcontent: React.FC = () => {
               <div style={{ marginBottom: 0, padding: '12px 16px', fontWeight: 600, fontFamily:"Montserrat" }}>Registered Children</div>
               <Input.Search placeholder="Search" style={{padding: '8px 16px', marginBottom:12}} />
               <Table
-              className="custom-ant-table"
+              className="custom-ant-table-child"
                 columns={columnsRegistered}
                 dataSource={data}
                 pagination={{ pageSize: 16 }}
@@ -120,7 +120,7 @@ const ChildDashboardcontent: React.FC = () => {
               <div style={{ marginBottom: 0, padding: '12px 16px', fontWeight: 600, fontFamily:"Montserrat" }}>Awaited Child</div>
               <Input.Search placeholder="Search" style={{padding: '8px 16px', marginBottom:12}} />
               <Table
-              className="custom-ant-table"
+              className="custom-ant-table-child"
                 columns={columnsAwaited}
                 dataSource={awaitedData}
                 pagination={{ pageSize: 7 }}
@@ -141,7 +141,7 @@ const ChildDashboardcontent: React.FC = () => {
               <div style={{ marginBottom: 0, padding: '12px 16px', fontWeight: 600, fontFamily:"Montserrat" }}>Error Child</div>
               <Input.Search placeholder="Search" style={{padding: '8px 16px', marginBottom:12}} />
               <Table
-              className="custom-ant-table"
+              className="custom-ant-table-absent"
                 columns={columnsError}
                 dataSource={errorData}
                 pagination={{ pageSize: 7 }}

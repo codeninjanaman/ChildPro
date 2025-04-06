@@ -4,7 +4,7 @@ import Layout from "../Layout/Layout"
 const ManageChild = () => {
   return (
     <div >
-     <Layout content={<ManageChildContent/>}/>
+     <Layout content={<ManageChildContent/>} activeIndex={2}/>
     </div>
   )
 }

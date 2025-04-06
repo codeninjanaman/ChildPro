@@ -1,5 +1,5 @@
 /* Green table header */
-.custom-ant-table .ant-table-thead > tr > th {
+.custom-ant-table-child .ant-table-thead > tr > th {
     background-color: hsl(150, 100%, 40%) !important;
     color: white !important;
     padding: 16px !important;
@@ -10,12 +10,31 @@
   }
   
   /* Remove table padding in body cells if needed */
-  .custom-ant-table .ant-table-tbody > tr > td {
+  .custom-ant-table-child .ant-table-tbody > tr > td {
     padding: 16px !important;
   }
   
   /* Smaller table font */
-  .custom-ant-table .ant-table {
+  .custom-ant-table-child .ant-table {
     font-size: 14px;
   }
+
+  .custom-ant-table-absent .ant-table-thead > tr > th {
+    background-color: #DB2E2E !important;
+    color: white !important;
+    padding: 16px !important;
+    margin: 0 !important;
+    border: none;
+    font-weight: 600;
+    border-radius: 0px !important;
+  }
   
+
+  .custom-ant-table-absent .ant-table-tbody > tr > td {
+    padding: 16px !important;
+  }
+  
+  /* Smaller table font */
+  .custom-ant-table-absent .ant-table {
+    font-size: 14px;
+  }

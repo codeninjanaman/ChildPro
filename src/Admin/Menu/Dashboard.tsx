@@ -95,7 +95,8 @@ const DashboardContent =()=>{
     {/* Attendance Rate */}
     <Row gutter={[20,0]}>
     <Col span={24}>
-    <div
+    <div 
+    onClick={()=>navigate('/attendance')}
       style={{
         backgroundColor: 'white',
         marginTop:'3%',
