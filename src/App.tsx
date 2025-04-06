@@ -1,14 +1,7 @@
 import './App.css'
 import { Route, Routes } from 'react-router-dom'
 
-
-
 import ChildForm from './Admin/AddStudentForm/StudentForm'
-
-
-
-
-
 import PaymentManagement from './Admin/Menu/Payments'
 import ContactUs from './Admin/Menu/ContactUs'
 import EducatorForm from './Admin/AddEducatorForm/EducatorForm'
@@ -25,10 +18,14 @@ import AttendanceDetails from './Admin/Attendance/ChildAttendance'
 import AbsentChild from './Admin/Attendance/Absenttable'
 import TutorDashboard from './Admin/ManageTutor/LandingPage'
 import RegisteredTutor from './Admin/ManageTutor/RegisteredTutor'
+import SuperAdminDashboard from './SuperAdmin/Dhashboard/SuperAdminDhasboard'
+import SuperAdminProvider from './SuperAdmin/Provider/SuperAdminProvider'
+import SuperAdminContactUs from './SuperAdmin/Contact Us/SuperAdminContactUs';
+import SuperAdminSidebar from './SuperAdmin/Layout/SuperAdminSidebar';
+import SuperAdminLayout from './SuperAdmin/Layout/SuperAdminLayout';
 
 function App() {
   
-
   return (
     <>
       <Routes>
@@ -44,6 +41,7 @@ function App() {
 
       <Route path="/manage-child" element={<ChildDashboard/>} />
       <Route path="/awaited-child/:name" element={<AwaitedChildDetails />} />
+     <Route path="/awaited-child/:name" element={<AwaitedChildDetails />} />
      <Route path="/registered-child/:crn" element={<RegisteredChildDetails />} />
      <Route path="/registered-children-table" element={<RegisteredChildrenTable />} />
      <Route path="/attendance" element={<AttendanceDashboardPage/>} />
@@ -56,6 +54,30 @@ function App() {
 
 
 
+     <Route path="/super-admin/dashboard" element={
+      <>
+        <SuperAdminSidebar />
+        <SuperAdminLayout>
+          <SuperAdminDashboard />
+        </SuperAdminLayout>
+      </>
+    } />
+     <Route path="/super-admin/provider" element={
+      <>
+        <SuperAdminSidebar />
+        <SuperAdminLayout>
+          <SuperAdminProvider />
+        </SuperAdminLayout>
+      </>
+    } />
+     <Route path="/super-admin/contactus" element={
+      <>
+        <SuperAdminSidebar />
+        <SuperAdminLayout>
+          <SuperAdminContactUs />
+        </SuperAdminLayout>
+      </>
+    } />
       </Routes>
     </>
   )
