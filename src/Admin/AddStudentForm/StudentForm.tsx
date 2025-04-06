@@ -145,6 +145,8 @@ authAmbulance: false,
 authTransport: false,
 authMedication: false,
 authNotifyEmergencies: false,
+numberOfDueImmunisations: 0, // Initialize this to a default value
+  dueImmunisations: [],
 
 
 
@@ -325,14 +327,15 @@ authNotifyEmergencies: Yup.boolean().oneOf([true, false], 'Required'),
   
 });
 
-export const InputField = ({ label, name, type = 'text', formik, stepSubmitted }: { label: string, name: string, type?: string, formik: any, stepSubmitted: boolean }) => (
+export const InputField = ({ label, name, type = 'text', formik, stepSubmitted, onChange }: { label: string, name: string, type?: string, formik: any, stepSubmitted: boolean , onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;}) => (
   <div style={{ marginBottom: '1rem', width:'100%' }}>
     <label style={{fontFamily:'Poppins', color:"rgba(0,0,0,0.8)", fontSize:'14px'}}>{label}</label><br />
     <input
       name={name}
       type={type}
-      onChange={formik.handleChange}
+      onChange={onChange || formik.handleChange}
       onBlur={formik.handleBlur}
+      
       value={formik.values[name]}
       style={{ padding: '0.5rem', width: '100%', border:'none',color:'rgba(0,0,0,0.8)',fontSize:'14px', fontFamily:'Poppins', boxShadow:'0px 0px 1px 0px rgba(0,0,0,0.55)', borderRadius:'5px' }}
     />
@@ -726,21 +729,7 @@ const parent2Fields = {
 
       <Col span={19} style={{ overflow: 'auto', maxHeight: '100vh'}} >
       <form onSubmit={formik.handleSubmit} style={{ padding: '2rem', flex: 1 }}>
-        {/* {step === 0 && <FormSectionOne formik={formik} stepSubmitted={stepSubmitted} />}
-        {step === 1 && <FormSectionTwo formik={formik} stepSubmitted={stepSubmitted} />}
-        {step === 2 && <FormSectionThree formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />}
-        {step === 3 && <FormSectionFour formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />}
-        {step === 4 && <FormSectionFive formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />}
-        {step === 5 && <FormSectionSix formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1' />}
-        {step === 6 && <FormSectionSeven formik={formik} stepSubmitted={stepSubmitted} parentPrefix='Parent1'/>}
-        {step === 7 && <FormSectionEight formik={formik} />}
-        {showParent2Sections && step === 8 && <FormSectionThree formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />}
-{showParent2Sections && step === 9 && <FormSectionFour formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />}
-{showParent2Sections && step === 10 && <FormSectionFive formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />}
-{showParent2Sections && step === 11 && <FormSectionSix formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />}
-{showParent2Sections && step === 12 && <FormSectionSeven formik={formik} stepSubmitted={stepSubmitted} parentPrefix="Parent2" />}
-{step === 13 && <FormSectionNine formik={formik} stepSubmitted={stepSubmitted} />}
-{step === 14 && <FormSectionTen formik={formik} stepSubmitted={stepSubmitted} />} */}
+        
            {visibleStepComponents[step]}
         <div style={{ marginTop: '2rem' , display:'flex', justifyContent:'space-between',marginBlock:"5%"}}>
           <button type="button" onClick={back} style={{ border:'1px solid rgba(0,0,0,0.8)', borderRadius:'12px', backgroundColor:"transparent", padding:'0.7% 2.5%'}}>Back</button>

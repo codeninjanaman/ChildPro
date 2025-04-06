@@ -78,7 +78,7 @@ const getCheckStatus = (checkTime: string | undefined, schedule: string, isCheck
 
 const AttendanceDetails = () => {
     return (
-      <Layout content={<AttendanceDetailscontent />} activeIndex={3} />
+      <Layout content={<AttendanceDetailscontent />} activeIndex={1} />
     );
   };
   

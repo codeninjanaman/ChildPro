@@ -7,7 +7,7 @@ import ChildForm from './Admin/AddStudentForm/StudentForm'
 
 
 
-import ManageTutor from './Admin/Menu/ManageTutor'
+
 
 import PaymentManagement from './Admin/Menu/Payments'
 import ContactUs from './Admin/Menu/ContactUs'
@@ -22,6 +22,9 @@ import RegisteredChildrenTable from './Admin/ManageChild/registeredChildrenTable
 import AttendanceDashboardPage from './Admin/Attendance/Attendancelandingpage'
 import PresentChild from './Admin/Attendance/Presenttable'
 import AttendanceDetails from './Admin/Attendance/ChildAttendance'
+import AbsentChild from './Admin/Attendance/Absenttable'
+import TutorDashboard from './Admin/ManageTutor/LandingPage'
+import RegisteredTutor from './Admin/ManageTutor/RegisteredTutor'
 
 function App() {
   
@@ -32,19 +35,26 @@ function App() {
       <Route path="/" element={<LoginPage/>} />
       <Route path="/dashboard" element={<Dashboard/>} />
       <Route path="/provider" element={<ProviderForm/>} />
-      <Route path="/manage-tutor" element={<ManageTutor/>} />
-      <Route path="/manage-child" element={<ChildDashboard/>} />
+      
+      
       <Route path="/payment-management" element={<PaymentManagement/>} />
       <Route path="/contactus" element={<ContactUs/>} />
       <Route path="/addchild" element={<ChildForm/>} />
       <Route path="/addeducator" element={<EducatorForm/>} />
+
+      <Route path="/manage-child" element={<ChildDashboard/>} />
       <Route path="/awaited-child/:name" element={<AwaitedChildDetails />} />
-      
      <Route path="/registered-child/:crn" element={<RegisteredChildDetails />} />
      <Route path="/registered-children-table" element={<RegisteredChildrenTable />} />
      <Route path="/attendance" element={<AttendanceDashboardPage/>} />
      <Route path="/present-children" element={<PresentChild/>} />
      <Route path="/attendancedetails/:crn" element={<AttendanceDetails/>} />
+     <Route path="/absent-children" element={<AbsentChild/>} />
+
+     <Route path="/manage-tutor" element={<TutorDashboard/>} />
+     <Route path="/registered-educator/:proda" element={<RegisteredTutor/>} />
+
+
 
       </Routes>
     </>
