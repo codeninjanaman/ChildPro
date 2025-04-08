@@ -56,7 +56,7 @@ const AttendanceDashboard: React.FC = () => {
       render: (_: any, record: any) => (
         <Button
           size="small"
-          onClick={() => navigate(`/absent-child/${record.crn}`)}
+          onClick={() => navigate(`/attendancedetails/${record.crn}`)}
           style={{ display: 'flex', alignItems: 'center' }}
         >
           <ArrowForwardIos style={{ fontSize: 12 }} />
@@ -105,7 +105,7 @@ const AttendanceDashboard: React.FC = () => {
                 pagination={false}
                 size="small"
               />
-              <div style={{ textAlign: 'center', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '16px', color: '#00cc66', cursor: 'pointer' }} onClick={() => navigate('/absent-children-details')}>
+              <div style={{ textAlign: 'center', borderTop: '1px solid rgba(0,0,0,0.1)', padding: '16px', color: '#00cc66', cursor: 'pointer' }} onClick={() => navigate('/absent-children')}>
                 View All
               </div>
             </div>
@@ -118,7 +118,7 @@ const AttendanceDashboard: React.FC = () => {
 
 const AttendanceDashboardPage = () => {
   return (
-    <Layout content={<AttendanceDashboard />} activeIndex={3} />
+    <Layout content={<AttendanceDashboard />} activeIndex={1} />
   );
 };
 

@@ -19,7 +19,7 @@ const Layout = ({
 }) => {
   const menuItems = [
     { name: "Dashboard", icon: <AiOutlineDashboard />, path: "/dashboard" },
-    { name: "Provider", icon: <HiOutlineSquares2X2 />, path: "/provider" },
+    { name: "Attendance", icon: <HiOutlineSquares2X2 />, path: "/attendance" },
     { name: "Manage Tutor", icon: <FaChalkboardTeacher />, path: "/manage-tutor" },
     { name: "Manage Child", icon: <FaChild />, path: "/manage-child" },
     { name: "Payment Management", icon: <FaMoneyCheckAlt />, path: "/payment-management" },
