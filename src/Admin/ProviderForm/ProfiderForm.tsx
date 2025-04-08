@@ -143,7 +143,7 @@ const renderFormikError = (
 
 
 
-const ProviderFormcontent: React.FC = () => {
+const ProviderForm: React.FC = () => {
   const getInitialValues = (): ProviderFormValues => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -583,12 +583,5 @@ const ProviderFormcontent: React.FC = () => {
   );
 };
 
-const ProviderForm = () => {
-  return (
-    <div >
-     <Layout content={<ProviderFormcontent/> } activeIndex={1}/>
-    </div>
-  )
-}
 
 export default ProviderForm;

@@ -23,12 +23,14 @@ import SuperAdminProvider from './SuperAdmin/Provider/SuperAdminProvider'
 import SuperAdminContactUs from './SuperAdmin/Contact Us/SuperAdminContactUs';
 import SuperAdminSidebar from './SuperAdmin/Layout/SuperAdminSidebar';
 import SuperAdminLayout from './SuperAdmin/Layout/SuperAdminLayout';
+import Startpage from './StartingPage/Startpage'
 
 function App() {
   
   return (
     <>
       <Routes>
+      <Route path="/start" element={<Startpage/>} />
       <Route path="/" element={<LoginPage/>} />
       <Route path="/dashboard" element={<Dashboard/>} />
       <Route path="/provider" element={<ProviderForm/>} />
