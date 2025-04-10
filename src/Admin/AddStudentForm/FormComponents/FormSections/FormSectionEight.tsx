@@ -1,16 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const FormSectionEight = ({ formik,  }:{ formik: any }) => {
-  const [hasParent2, setHasParent2] = useState(false);
+const FormSectionEight = ({ formik }: { formik: any }) => {
+  const [hasParent2, setHasParent2] = useState(formik.values.hasParent2 || false);
+
+  // Update formik when state changes
+  useEffect(() => {
+    formik.setFieldValue('hasParent2', hasParent2);
+  }, [hasParent2]);
 
   const handleYes = () => {
     setHasParent2(true);
-    formik.setFieldValue('hasParent2', true);
   };
 
   const handleNo = () => {
     setHasParent2(false);
-    formik.setFieldValue('hasParent2', false);
   };
 
   return (

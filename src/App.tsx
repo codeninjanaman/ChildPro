@@ -30,8 +30,8 @@ function App() {
   return (
     <>
       <Routes>
-      <Route path="/start" element={<Startpage/>} />
-      <Route path="/" element={<LoginPage/>} />
+      <Route path="/" element={<Startpage/>} />
+      <Route path="/login" element={<LoginPage/>} />
       <Route path="/dashboard" element={<Dashboard/>} />
       <Route path="/provider" element={<ProviderForm/>} />
       

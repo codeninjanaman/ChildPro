@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import  { useRef, useState, useEffect } from 'react';
 import { Button, Typography, Drawer, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -11,6 +11,7 @@ import Contact from './Contact';
 import TwitterIcon from '@mui/icons-material/X';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import { useNavigate } from 'react-router-dom';
 
 const Startpage = () => {
   const homeRef = useRef(null);
@@ -49,6 +50,8 @@ const Startpage = () => {
     { name: 'About Us', ref: aboutRef },
     { name: 'Contact Us', ref: contactRef },
   ];
+
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -153,6 +156,7 @@ const Startpage = () => {
             {/* Login Button */}
             <Button
               variant="contained"
+              onClick={()=>navigate('/login')}
               sx={{
                 borderRadius: '12px',
                 textTransform: 'none',

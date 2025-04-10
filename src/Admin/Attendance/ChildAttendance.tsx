@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, Button, Modal, Form, Input, Select, Radio } from 'antd';
+import { Table, Button, Modal, Form, Input, Select, Checkbox } from 'antd';
 import { Print } from '@mui/icons-material';
 import { useParams } from 'react-router-dom';
 import Layout from '../Layout/Layout';
@@ -216,84 +216,127 @@ const AttendanceDetailscontent: React.FC = () => {
 
 
       {/* Modal */}
-      <Modal visible={modalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} width={600}>
+      <Modal visible={modalVisible} onOk={handleOk} onCancel={handleCancel} footer={null} width={900}>
   {selectedRecord && (
-    <Form layout="vertical" initialValues={selectedRecord}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '3%' }}>
-        <div
-          style={{
-            boxShadow: '0px 4px 4px 0px rgba(0,0,0,0.24)',
-            display: 'inline-flex',
-            padding: '3px 20px',
-            fontSize: '20px',
-            color: '#00E676',
-            borderTopRightRadius: '50px',
-            borderBottomRightRadius: '50px',
-            border: '1px solid rgba(0,0,0,0.1)',
-          }}
-        >
-          Naman Verma
-        </div>
+    <Form
+      layout="vertical"
+      initialValues={selectedRecord}
+      onValuesChange={(_changedValues, allValues) => {
+        setSelectedRecord(prev => ({
+          ...prev!,
+          ...allValues,
+        }));
+      }}
+    >
+      {/** Helper variable for disabling */}
+      {(() => {
+        var isDisabled = selectedRecord.status === 'Absent' || selectedRecord.status === 'Holiday';
+        return (
+          <>
+            {/* Status Row */}
+            <div style={{ backgroundColor: '#F4E390', padding: '15px 20px', borderRadius: '12px', marginBottom: '30px', display: 'flex', alignItems: 'center', gap: '30px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span>Absence</span>
+                <Checkbox
+                  checked={selectedRecord.status === 'Absent'}
+                  onChange={(e) => {
+                    setSelectedRecord(prev => ({
+                      ...prev!,
+                      status: e.target.checked ? 'Absent' : 'Present',
+                    }));
+                  }}
+                />
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span>Holiday</span>
+                <Checkbox
+                  checked={selectedRecord.status === 'Holiday'}
+                  onChange={(e) => {
+                    setSelectedRecord(prev => ({
+                      ...prev!,
+                      status: e.target.checked ? 'Holiday' : 'Present',
+                    }));
+                  }}
+                />
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span>Fees</span>
+                <Form.Item name="payment" noStyle>
+                  <Input style={{ width: 100 }} placeholder="$" />
+                </Form.Item>
+              </div>
+            </div>
 
-        <div style={{ fontWeight: '500' }}>
-          Date : <span style={{ fontWeight: '400', color: 'rgba(0,0,0,0.7)' }}>{selectedRecord.date}</span>
-        </div>
-        <div style={{ fontWeight: '500' }}>
-          Day : <span style={{ fontWeight: '400', color: 'rgba(0,0,0,0.7)' }}>{selectedRecord.day}</span>
-        </div>
-      </div>
+            {/* Time Inputs */}
+            <div style={{ display: 'flex', gap: '20px',paddingInline:"10%", marginBottom: '10px' }}>
+              <Form.Item label="Start Time" name="startTime" style={{ flex: 1 }}>
+                <Input type="time" disabled={isDisabled} />
+              </Form.Item>
+              <Form.Item label="End Time" name="endTime" style={{ flex: 1 }}>
+                <Input type="time" disabled={isDisabled} />
+              </Form.Item>
+            </div>
 
-      <Form.Item label="Status" name="status">
-        <Radio.Group defaultValue={selectedRecord.status}>
-          <Radio.Button value="Present" style={{ marginRight: '10px', backgroundColor: '#00E676' }}>Present</Radio.Button>
-          <Radio.Button value="Absent" style={{ marginRight: '10px' }}>Absent</Radio.Button>
-          <Radio.Button value="Holiday">Holiday</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
+            {/* Actual In/Out Times */}
+            {[1, 2, 3, 4].map(num => (
+              <div style={{ display: 'flex', gap: '20px', marginBottom: '10px', paddingInline:"10%" }} key={num}>
+                <Form.Item label={`Actual in Time ${num}`} name={`actualInTime${num}`} style={{ flex: 1 }}>
+                  <Input type="time" disabled={isDisabled} />
+                </Form.Item>
+                <Form.Item label={`Actual Out Time ${num}`} name={`actualOutTime${num}`} style={{ flex: 1 }}>
+                  <Input type="time" disabled={isDisabled} />
+                </Form.Item>
+              </div>
+            ))}
 
-      <div style={{display:'flex', fontWeight:"500"}}>
-        Schedule&nbsp;&nbsp; <span style={{border:'1px solid rgba(0,0,0,0.1)',color:'rgba(0,0,0,0.65)',fontWeight:'400', paddingInline:"1%", borderRadius:"5px"}}>{selectedRecord.schedule}</span>
-      </div>
+            {/* Dropdowns */}
+            <div style={{ display: 'flex', gap: '20px',paddingInline:"10%", marginBottom: '10px' }}>
+              <Form.Item label="Session Type" name="sessionType" style={{ flex: 1 }}>
+                <Select>
+                  <Select.Option value="Standard">Standard</Select.Option>
+                  <Select.Option value="Half Day">Half Day</Select.Option>
+                </Select>
+              </Form.Item>
+              <Form.Item label="Preschool" name="preschool" style={{ flex: 1 }}>
+                <Select>
+                  <Select.Option value="Yes">Yes</Select.Option>
+                  <Select.Option value="No">No</Select.Option>
+                </Select>
+              </Form.Item>
+            </div>
 
-      {selectedRecord.status === 'Present' && (
-        <>
-          <Form.Item label="Check In" name="checkIn">
-            <Input type="time" style={{ marginLeft: '20px' }} />
-            <span style={{ color: 'red', fontSize: '12px', marginLeft: '10px' }}>Late In</span>
-          </Form.Item>
-          <Form.Item label="Check Out" name="checkOut">
-            <Input type="time" style={{ marginLeft: '20px' }} />
-            <span style={{ color: 'red', fontSize: '12px', marginLeft: '10px' }}>Late In</span>
-          </Form.Item>
-        </>
-      )}
+            {/* Absence documents + Reason */}
+            <div style={{ display: 'flex', gap: '20px',paddingInline:"10%", marginBottom: '10px' }}>
+              <Form.Item label="Absence documents held" name="absenceDocument" valuePropName="checked">
+                <Checkbox />
+              </Form.Item>
+              <Form.Item label="Reason" name="reason" style={{ flex: 1 }}>
+                <Select placeholder="Select Reason">
+                  <Select.Option value="Sick Leave">Sick Leave</Select.Option>
+                  <Select.Option value="Personal Leave">Personal Leave</Select.Option>
+                  <Select.Option value="Holiday">Holiday</Select.Option>
+                </Select>
+              </Form.Item>
+            </div>
 
-      {selectedRecord.status === 'Absent' && (
-        <Form.Item label="Reason" name="reason">
-          <Select defaultValue={selectedRecord.reason}>
-            <Select.Option value="Sick Leave">Sick Leave</Select.Option>
-            <Select.Option value="Personal Leave">Personal Leave</Select.Option>
-          </Select>
-        </Form.Item>
-      )}
-
-      {selectedRecord.status === 'Holiday' && (
-        <Form.Item label="Holiday Type" name="holiday">
-          <Select defaultValue={selectedRecord.reason}>
-            <Select.Option value="National Holiday">National Holiday</Select.Option>
-            <Select.Option value="Public Holiday">Public Holiday</Select.Option>
-          </Select>
-        </Form.Item>
-      )}
-
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button type="primary" onClick={handleOk} style={{ backgroundColor: '#00E676', borderColor: '#00E676' }}>
-          Save
-        </Button>
-      </div>
+            {/* Buttons */}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
+              <Button style={{ backgroundColor: '#D9D9D9', borderColor: '#D9D9D9', color: '#fff' }}>
+                delete
+              </Button>
+              <Button type="primary" htmlType="submit" style={{ backgroundColor: '#00E676', borderColor: '#00E676' }}>
+                Resubmit
+              </Button>
+            </div>
+          </>
+        );
+      })()}
     </Form>
   )}
 </Modal>
+
+
+
 
     </div>
   );
