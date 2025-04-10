@@ -61,7 +61,7 @@ const Layout = ({
           }}
         >
           <div style={{ fontSize: "24px", color: "#6366F1", marginRight: "8px" }}>©</div>
-          <h1 style={{ fontSize: "18px", fontWeight: "bold" }}>Child Care</h1>
+          <h1 style={{ fontSize: "18px", fontWeight: "bold", cursor:'pointer' }}>ChildCarePro</h1>
         </div>
 
         {/* Menu Items */}
@@ -128,8 +128,8 @@ const Layout = ({
           <Col span={6} style={{ paddingInline: "1%" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div style={{ color: "#667085", fontSize: "16px" }}>Good Morning, Naman</div>
-              <div style={{ color: "black", fontSize: "22px", fontWeight: "bold" }}>
-                Welcome to CHILDPRO
+              <div style={{ color: "black", fontSize: "20px", fontWeight: "bold" }}>
+                Welcome to CHILDCAREPRO
               </div>
             </div>
           </Col>
